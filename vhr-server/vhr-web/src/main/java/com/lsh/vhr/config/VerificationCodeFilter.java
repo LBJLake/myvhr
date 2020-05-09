@@ -16,11 +16,11 @@ public class VerificationCodeFilter extends GenericFilter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
-        if ("POST".equals(req.getMethod())&&"/doLogin".equals(req.getServletPath())){
+        if ("POST".equals(req.getMethod()) && "/doLogin".equals(req.getServletPath())) {
             //登陆请求
             String code = req.getParameter("code");
             String verify_code = (String) req.getSession().getAttribute("verify_code");
-            if (code==null||"".equals(code)||!code.equalsIgnoreCase(verify_code)){
+            if (code == null || "".equals(code) || !code.equalsIgnoreCase(verify_code)) {
                 //验证码不正确
                 resp.setContentType("application/json;charset=utf-8");
                 PrintWriter out = resp.getWriter();
@@ -29,14 +29,14 @@ public class VerificationCodeFilter extends GenericFilter {
                 out.close();
                 return;
 
-            }else{
+            } else {
                 //放行
-                filterChain.doFilter(req,resp);
+                filterChain.doFilter(req, resp);
             }
 
-        }else {
+        } else {
             //放行
-            filterChain.doFilter(req,resp);
+            filterChain.doFilter(req, resp);
         }
 
     }

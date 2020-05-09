@@ -70,7 +70,7 @@
         methods: {
             initDeps(){
                 this.loading=true;
-                this.getRequest("/system/basic/department/").then(resp=>{
+                this.getRequest("/vhr-web/system/basic/department/").then(resp=>{
                     this.loading=false;
                     if (resp){
                         this.deps=resp;
@@ -108,7 +108,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    this.deleteRequest("/system/basic/department/"+data.id).then(resp=>{
+                    this.deleteRequest("/vhr-web/system/basic/department/"+data.id).then(resp=>{
                         if (resp){
                             this.removeDepFromDeps(null,this.deps,data.id);
                         }
@@ -136,7 +136,7 @@
             },
             doAddDep(){
                 if (this.dep.name&&this.dep.name.trim().length>0){
-                    this.postRequest("/system/basic/department/",this.dep).then(resp=>{
+                    this.postRequest("/vhr-web/system/basic/department/",this.dep).then(resp=>{
                         if (resp){
                             this.addDep2Deps(this.deps,resp.obj);
                             this.dialogVisible=false;

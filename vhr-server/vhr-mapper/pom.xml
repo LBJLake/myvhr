@@ -12,7 +12,7 @@
     <artifactId>vhr-mapper</artifactId>
 
     <dependencies>
-<!--        vhr-model-->
+        <!--        vhr-model-->
         <dependency>
             <groupId>com.lsh</groupId>
             <artifactId>vhr-model</artifactId>

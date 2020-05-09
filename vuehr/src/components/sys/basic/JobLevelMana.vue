@@ -155,7 +155,7 @@
         methods:{
             addJobLevel(){
                 if (this.jl.name&&this.jl.name.trim().length>0&&this.jl.titleLevel){
-                    this.postRequest("/system/basic/joblevel/",this.jl).then(resp=>{
+                    this.postRequest("/vhr-web/system/basic/joblevel/",this.jl).then(resp=>{
                         if (resp){
                             this.initJls();
                         }
@@ -170,7 +170,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    this.deleteRequest("/system/basic/joblevel/"+data.id).then(resp=>{
+                    this.deleteRequest("/vhr-web/system/basic/joblevel/"+data.id).then(resp=>{
                         if (resp){
                             this.initJls();
                         }
@@ -188,7 +188,7 @@
 
             },
             doUpdate(){
-                this.putRequest("/system/basic/joblevel/",this.updateJl).then(resp=>{
+                this.putRequest("/vhr-web/system/basic/joblevel/",this.updateJl).then(resp=>{
                     if (resp){
                         this.initJls();
                         this.dialogVisible=false;
@@ -206,7 +206,7 @@
                     this.multipleSelection.forEach(item=>{
                         ids+='ids='+item.id+'&';
                     });
-                    this.deleteRequest("/system/basic/joblevel/"+ids).then(resp=>{
+                    this.deleteRequest("/vhr-web/system/basic/joblevel/"+ids).then(resp=>{
                         if (resp){
                             this.initJls();
                         }
@@ -224,7 +224,7 @@
             },
             initJls(){
                 this.loading=true;
-                this.getRequest("/system/basic/joblevel/").then(resp=>{
+                this.getRequest("/vhr-web/system/basic/joblevel/").then(resp=>{
                     this.loading=false;
                     if (resp){
                         this.jls=resp;

@@ -11,6 +11,7 @@ import java.util.List;
 public class PoliticsstatusService {
     @Autowired
     PoliticsstatusMapper politicsstatusMapper;
+
     public List<Politicsstatus> getAllPoliticsstatus() {
         return politicsstatusMapper.getAllPoliticsstatus();
     }

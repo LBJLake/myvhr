@@ -134,7 +134,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    deleteRequest("/personnel/train/"+id).then(resp=>{
+                    deleteRequest("/vhr-web/personnel/train/"+id).then(resp=>{
                         if (resp){
                             this.initEmptrains();
                         }
@@ -152,7 +152,7 @@
             addEditEmptrain(){
                 if (this.emptrain.id){
                     //修改
-                    putRequest("/personnel/train/",this.emptrain).then(resp=>{
+                    putRequest("/vhr-web/personnel/train/",this.emptrain).then(resp=>{
                         if (resp){
                             this.initEmptrains();
                             this.dialogVisible=false;
@@ -160,7 +160,7 @@
                     });
                 }else {
                     //添加
-                    postRequest("/personnel/train/",this.emptrain).then(resp=>{
+                    postRequest("/vhr-web/personnel/train/",this.emptrain).then(resp=>{
                         if (resp){
                             this.initEmptrains();
                             this.dialogVisible=false;
@@ -183,14 +183,14 @@
                 this.dialogVisible=true;
             },
             initEmployees(){
-                getRequest("/personnel/train/employees").then(resp=>{
+                getRequest("/vhr-web/personnel/train/employees").then(resp=>{
                     if (resp){
                         this.employees=resp;
                     }
                 });
             },
             initEmptrains(){
-                getRequest("/personnel/train/?keyword="+this.keyword).then(resp=>{
+                getRequest("/vhr-web/personnel/train/?keyword="+this.keyword).then(resp=>{
                     if (resp){
                         this.emptranins=resp;
                     }

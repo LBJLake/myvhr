@@ -37,13 +37,13 @@ public class FastDFSUtils {
         return null;
     }
 
-    public static String uploadWithToken(String filePath,String nginxHost,String secretKey){
-        int ts=((int) Instant.now().getEpochSecond());
+    public static String uploadWithToken(String filePath, String nginxHost, String secretKey) {
+        int ts = ((int) Instant.now().getEpochSecond());
         char[] chars = filePath.toCharArray();
-        String filePath2=null;
+        String filePath2 = null;
         for (int i = 0; i < chars.length; i++) {
-            if (chars[i]=='/'){
-                filePath2=filePath.substring(i+1);
+            if (chars[i] == '/') {
+                filePath2 = filePath.substring(i + 1);
                 break;
             }
         }
@@ -65,7 +65,7 @@ public class FastDFSUtils {
         } catch (MyException e) {
             e.printStackTrace();
         }
-    return null;
+        return null;
     }
 
 }

@@ -24,16 +24,16 @@ public class MailSendTask {
     EmployeeService employeeService;
 
     @Scheduled(cron = "0/10 * * * * ?")
-    public void mailResendTask(){
-        List<MailSendLog> logs=mailSendLogService.getMailSendLogsByStatus();
+    public void mailResendTask() {
+        List<MailSendLog> logs = mailSendLogService.getMailSendLogsByStatus();
         for (MailSendLog log : logs) {
-            if (log.getCount()>=3){
-                mailSendLogService.updateMailSendLogStatus(log.getMsgId(),2);//直接设置失败
-            }else{
-                mailSendLogService.updateCount(log.getMsgId(),new Date());
-                Employee emp=employeeService.getEmployeeById(log.getEmpId());
-                rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME,MailConstants.MAIL_ROUTING_KEY_NAME
-                        ,emp,new CorrelationData(log.getMsgId()));
+            if (log.getCount() >= 3) {
+                mailSendLogService.updateMailSendLogStatus(log.getMsgId(), 2);//直接设置失败
+            } else {
+                mailSendLogService.updateCount(log.getMsgId(), new Date());
+                Employee emp = employeeService.getEmployeeById(log.getEmpId());
+                rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME, MailConstants.MAIL_ROUTING_KEY_NAME
+                        , emp, new CorrelationData(log.getMsgId()));
 
             }
         }

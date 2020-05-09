@@ -14,7 +14,7 @@ public class MailSendLogService {
     MailSendLogMapper mailSendLogMapper;
 
     public Integer updateMailSendLogStatus(String msgId, Integer i) {
-        return mailSendLogMapper.updateMailSendLogStatus(msgId,i);
+        return mailSendLogMapper.updateMailSendLogStatus(msgId, i);
     }
 
     public Integer insert(MailSendLog mailSendLog) {
@@ -26,6 +26,6 @@ public class MailSendLogService {
     }
 
     public Integer updateCount(String msgId, Date date) {
-        return mailSendLogMapper.updateCount(msgId,date);
+        return mailSendLogMapper.updateCount(msgId, date);
     }
 }

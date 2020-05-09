@@ -18,34 +18,34 @@ public class EmployeetrainController {
     EmployeeTrainService employeeTrainService;
 
     @GetMapping("/")
-    public List<Employeetrain> getAllEmployeeTrains(@RequestParam(value = "keyword",required = false) String keyword){
+    public List<Employeetrain> getAllEmployeeTrains(@RequestParam(value = "keyword", required = false) String keyword) {
         return employeeTrainService.getAllEmployeeTrains(keyword);
     }
 
     @GetMapping("/employees")
-    public List<Employee> getEmployees(){
+    public List<Employee> getEmployees() {
         return employeeTrainService.getEmployees();
     }
 
     @PostMapping("/")
-    public RespBean addEmployeetrain(@RequestBody Employeetrain employeetrain){
-        if (employeeTrainService.addEmployeetrain(employeetrain)==1){
+    public RespBean addEmployeetrain(@RequestBody Employeetrain employeetrain) {
+        if (employeeTrainService.addEmployeetrain(employeetrain) == 1) {
             return RespBean.ok("添加成功！");
         }
         return RespBean.error("添加失败！");
     }
 
     @PutMapping("/")
-    public RespBean updateEmployeetrain(@RequestBody Employeetrain employeetrain){
-        if (employeeTrainService.updateEmployeetrain(employeetrain)==1){
+    public RespBean updateEmployeetrain(@RequestBody Employeetrain employeetrain) {
+        if (employeeTrainService.updateEmployeetrain(employeetrain) == 1) {
             return RespBean.ok("修改成功！");
         }
         return RespBean.error("修改失败！");
     }
 
     @DeleteMapping("/{id}")
-    public RespBean deleteEmployeetrain(@PathVariable Integer id){
-        if (employeeTrainService.deleteEmployeetrain(id)==1){
+    public RespBean deleteEmployeetrain(@PathVariable Integer id) {
+        if (employeeTrainService.deleteEmployeetrain(id) == 1) {
             return RespBean.ok("删除成功！");
         }
         return RespBean.error("删除失败！");

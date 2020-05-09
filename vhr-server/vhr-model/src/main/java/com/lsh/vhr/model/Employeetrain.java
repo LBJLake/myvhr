@@ -8,7 +8,7 @@ public class Employeetrain {
     private Integer id;
 
     private Integer eid;
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Shanghai")
     private Date trainDate;
     private String trainContent;
 

@@ -31,7 +31,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private HrService hrService;
     @Autowired
@@ -42,9 +42,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     VerificationCodeFilter verificationCodeFilter;
 
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(hrService);
@@ -52,14 +53,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/login","/verifyCode");
+        web.ignoring().antMatchers("/login", "/verifyCode");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.addFilterBefore(verificationCodeFilter, UsernamePasswordAuthenticationFilter.class);
         http.authorizeRequests()
-               // .anyRequest().authenticated()
+                // .anyRequest().authenticated()
                 .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
                     @Override
                     public <O extends FilterSecurityInterceptor> O postProcess(O object) {
@@ -79,7 +80,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                     public void onAuthenticationSuccess(HttpServletRequest req, HttpServletResponse resp, Authentication auth) throws IOException, ServletException {
                         resp.setContentType("application/json;charset=utf-8");
                         PrintWriter out = resp.getWriter();
-                        Hr hr =(Hr)auth.getPrincipal();
+                        Hr hr = (Hr) auth.getPrincipal();
                         hr.setPassword(null);
                         RespBean ok = RespBean.ok("登陆成功！", hr);
                         String s = new ObjectMapper().writeValueAsString(ok);
@@ -95,15 +96,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                         resp.setContentType("application/json;charset=utf-8");
                         PrintWriter out = resp.getWriter();
                         RespBean respBean = RespBean.error("登陆失败！");
-                        if (e instanceof LockedException){
+                        if (e instanceof LockedException) {
                             respBean.setMsg("用户被锁定，请联系系统管理员！");
-                        }else if (e instanceof CredentialsExpiredException){
+                        } else if (e instanceof CredentialsExpiredException) {
                             respBean.setMsg("密码过期，请联系系统管理员！");
-                        }else if (e instanceof AccountExpiredException){
+                        } else if (e instanceof AccountExpiredException) {
                             respBean.setMsg("账户过期，请联系系统管理员！");
-                        }else if (e instanceof DisabledException){
+                        } else if (e instanceof DisabledException) {
                             respBean.setMsg("账户被禁用，请联系系统管理员！");
-                        }else if (e instanceof BadCredentialsException){
+                        } else if (e instanceof BadCredentialsException) {
                             respBean.setMsg("用户名或密码输入错误！");
                         }
                         out.write(new ObjectMapper().writeValueAsString(respBean));
@@ -130,19 +131,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .csrf().disable().exceptionHandling()
                 //没有认证时，在这里处理结果，不要重定向
                 .authenticationEntryPoint(new AuthenticationEntryPoint() {
-            @Override
-            public void commence(HttpServletRequest req, HttpServletResponse resp, AuthenticationException e) throws IOException, ServletException {
-                resp.setContentType("application/json;charset=utf-8");
-                resp.setStatus(401);
-                PrintWriter out = resp.getWriter();
-                RespBean respBean = RespBean.error("访问失败！");
-                if (e instanceof InsufficientAuthenticationException){
-                    respBean.setMsg("请求失败，请联系系统管理员！");
-                }
-                out.write(new ObjectMapper().writeValueAsString(respBean));
-                out.flush();
-                out.close();
-            }
-        });
+                    @Override
+                    public void commence(HttpServletRequest req, HttpServletResponse resp, AuthenticationException e) throws IOException, ServletException {
+                        resp.setContentType("application/json;charset=utf-8");
+                        resp.setStatus(401);
+                        PrintWriter out = resp.getWriter();
+                        RespBean respBean = RespBean.error("访问失败！");
+                        if (e instanceof InsufficientAuthenticationException) {
+                            respBean.setMsg("请求失败，请联系系统管理员！");
+                        }
+                        out.write(new ObjectMapper().writeValueAsString(respBean));
+                        out.flush();
+                        out.close();
+                    }
+                });
     }
 }

@@ -23,12 +23,13 @@ public class MenuService {
     MenuMapper menuMapper;
     @Autowired
     MenuRoleMapper menuRoleMapper;
+
     public List<Menu> getMenusByHrId() {
         return menuMapper.getMenusByHrId(HrUtils.getCurrentHr().getId());
     }
 
     @Cacheable(key = "#root.methodName")
-    public List<Menu> getAllMenusWithRole(){
+    public List<Menu> getAllMenusWithRole() {
         return menuMapper.getAllMenusWithRole();
     }
 
@@ -41,10 +42,10 @@ public class MenuService {
     }
 
     @Transactional
-    public boolean updateMenuRole(Integer rid,Integer[] mids) {
+    public boolean updateMenuRole(Integer rid, Integer[] mids) {
         menuRoleMapper.deleteByRid(rid);
-        if (mids==null)return true;//当全部不勾选的情况
+        if (mids == null) return true;//当全部不勾选的情况
         Integer result = menuRoleMapper.insertRecord(rid, mids);
-        return result==mids.length;
+        return result == mids.length;
     }
 }

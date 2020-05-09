@@ -17,15 +17,16 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
     </properties>
 
     <dependencies>
-<!--        websocket-->
+        <!--        websocket-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
-<!--        vhr-service-->
+        <!--        vhr-service-->
         <dependency>
             <groupId>com.lsh</groupId>
             <artifactId>vhr-service</artifactId>
@@ -36,11 +37,16 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-<!--        fastdfs-client-->
+        <!--        fastdfs-client-->
         <dependency>
             <groupId>cn.bestwu</groupId>
             <artifactId>fastdfs-client-java</artifactId>
             <version>1.27</version>
+        </dependency>
+<!--        eureka-client-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         <!--        test-->
         <dependency>
@@ -60,6 +66,18 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>

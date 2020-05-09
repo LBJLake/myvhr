@@ -85,7 +85,7 @@ const store= new Vuex.Store({
         },
         initData (context) {
             context.commit('INIT_DATA');
-            getRequest("/chat/hrs").then(resp=>{
+            getRequest("/vhr-web/chat/hrs").then(resp=>{
                 if (resp){
                     context.commit('INIT_HR',resp);
                 }

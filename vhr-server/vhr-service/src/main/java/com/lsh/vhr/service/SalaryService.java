@@ -12,6 +12,7 @@ import java.util.List;
 public class SalaryService {
     @Autowired
     SalaryMapper salaryMapper;
+
     public List<Salary> getAllSalaries() {
         return salaryMapper.getAllSalaries();
     }

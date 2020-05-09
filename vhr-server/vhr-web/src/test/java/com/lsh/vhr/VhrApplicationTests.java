@@ -21,7 +21,7 @@ class VhrApplicationTests {
         ClientGlobal.initByProperties("fastdfs-client.properties");
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getConnection();
-        StorageServer storageServer=null;
+        StorageServer storageServer = null;
         StorageClient1 client1 = new StorageClient1(trackerServer, storageServer);
         NameValuePair pairs[] = null;
         String fileId = client1.upload_file1("D:\\number.jpg", "jpg", pairs);
@@ -35,7 +35,7 @@ class VhrApplicationTests {
         ClientGlobal.initByProperties("fastdfs-client.properties");
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getConnection();
-        StorageServer storageServer=null;
+        StorageServer storageServer = null;
         StorageClient1 client1 = new StorageClient1(trackerServer, storageServer);
         NameValuePair pairs[] = null;
         byte[] bytes = client1.download_file1("group1/M00/00/00/wKgfgV6bz76AVps2AABKZpVJp2U291.jpg");
@@ -47,7 +47,7 @@ class VhrApplicationTests {
 
     @Test
     void testToken() throws UnsupportedEncodingException, NoSuchAlgorithmException, MyException {
-        int ts=((int) Instant.now().getEpochSecond());
+        int ts = ((int) Instant.now().getEpochSecond());
         String token = ProtoCommon.getToken("M00/00/00/wKgfgV6cAJSAE5MlAABKZpVJp2U242.jpg", ts, "FastDFS1234567890");
         StringBuffer sb = new StringBuffer();
         sb.append("http://192.168.31.129")

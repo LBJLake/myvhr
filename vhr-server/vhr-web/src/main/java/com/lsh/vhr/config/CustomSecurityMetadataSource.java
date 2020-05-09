@@ -22,18 +22,18 @@ import java.util.List;
 public class CustomSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
     @Autowired
     MenuService menuService;
-    AntPathMatcher antPathMatcher=new AntPathMatcher();
+    AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     @Override
     public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException {
         String requestUrl = ((FilterInvocation) o).getRequestUrl();
         List<Menu> menus = menuService.getAllMenusWithRole();
         for (Menu menu : menus) {
-            if (antPathMatcher.match(menu.getUrl(),requestUrl)){
+            if (antPathMatcher.match(menu.getUrl(), requestUrl)) {
                 List<Role> roles = menu.getRoles();
-                String[] strings=new String[roles.size()];
+                String[] strings = new String[roles.size()];
                 for (int i = 0; i < roles.size(); i++) {
-                    strings[i]=roles.get(i).getName();
+                    strings[i] = roles.get(i).getName();
                 }
                 return SecurityConfig.createList(strings);
 

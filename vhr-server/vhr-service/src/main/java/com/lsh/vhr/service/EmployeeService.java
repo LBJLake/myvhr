@@ -25,20 +25,20 @@ public class EmployeeService {
     @Autowired
     MailSendLogService mailSendLogService;
 
-    SimpleDateFormat yearFormat=new SimpleDateFormat("yyyy");
-    SimpleDateFormat monthFormat=new SimpleDateFormat("MM");
-    DecimalFormat decimalFormat=new DecimalFormat("##.00");
+    SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy");
+    SimpleDateFormat monthFormat = new SimpleDateFormat("MM");
+    DecimalFormat decimalFormat = new DecimalFormat("##.00");
 
     @Autowired
     RabbitTemplate rabbitTemplate;
-    public static final Logger logger= LoggerFactory.getLogger(EmployeeService.class);
+    public static final Logger logger = LoggerFactory.getLogger(EmployeeService.class);
 
     public RespPageBean getEmployeeByPage(Integer page, Integer size, Employee employee, Date[] beginDateScope) {
-        if (page!=null &&size!=null){
-            page=(page-1)*size;
+        if (page != null && size != null) {
+            page = (page - 1) * size;
         }
-        List<Employee> data = employeeMapper.getEmployeeByPage(page, size,employee,beginDateScope);
-        Long total = employeeMapper.getTotal(employee,beginDateScope);
+        List<Employee> data = employeeMapper.getEmployeeByPage(page, size, employee, beginDateScope);
+        Long total = employeeMapper.getTotal(employee, beginDateScope);
         RespPageBean bean = new RespPageBean();
         bean.setData(data);
         bean.setTotal(total);
@@ -49,13 +49,13 @@ public class EmployeeService {
     public Integer addEmp(Employee employee) {
         Date beginContract = employee.getBeginContract();
         Date endContract = employee.getEndContract();
-        double month=(Double.parseDouble(yearFormat.format(endContract))-Double.parseDouble(yearFormat.format(beginContract)))*12
-                +(Double.parseDouble(monthFormat.format(endContract))-Double.parseDouble(monthFormat.format(beginContract)));
+        double month = (Double.parseDouble(yearFormat.format(endContract)) - Double.parseDouble(yearFormat.format(beginContract))) * 12
+                + (Double.parseDouble(monthFormat.format(endContract)) - Double.parseDouble(monthFormat.format(beginContract)));
 
-        employee.setContractTerm(Double.parseDouble(decimalFormat.format(month/12)));//算出合同日期
+        employee.setContractTerm(Double.parseDouble(decimalFormat.format(month / 12)));//算出合同日期
         int result = employeeMapper.insertSelective(employee);
 
-        if (result==1){
+        if (result == 1) {
             Employee emp = employeeMapper.getEmployeeById(employee.getId());
             logger.info(emp.toString());
             String msgId = UUID.randomUUID().toString();
@@ -65,10 +65,10 @@ public class EmployeeService {
             mailSendLog.setExchange(MailConstants.MAIL_EXCHANGE_NAME);
             mailSendLog.setRouteKey(MailConstants.MAIL_ROUTING_KEY_NAME);
             mailSendLog.setEmpId(emp.getId());
-            mailSendLog.setTryTime(new Date(System.currentTimeMillis()+1000*60*MailConstants.MSG_TIMEOUT));
+            mailSendLog.setTryTime(new Date(System.currentTimeMillis() + 1000 * 60 * MailConstants.MSG_TIMEOUT));
             mailSendLogService.insert(mailSendLog);
 
-            rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME,MailConstants.MAIL_ROUTING_KEY_NAME,emp,new CorrelationData(msgId));//最后一个参数为唯一标记符
+            rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME, MailConstants.MAIL_ROUTING_KEY_NAME, emp, new CorrelationData(msgId));//最后一个参数为唯一标记符
         }
 
         return result;
@@ -91,18 +91,18 @@ public class EmployeeService {
     }
 
     public RespPageBean getEmployeeByPageWithSalary(Integer page, Integer size) {
-        if (page!=null&&size!=null){
-            page=(page-1)*size;
+        if (page != null && size != null) {
+            page = (page - 1) * size;
         }
         List<Employee> list = employeeMapper.getEmployeeByPageWithSalary(page, size);
         RespPageBean respPageBean = new RespPageBean();
         respPageBean.setData(list);
-        respPageBean.setTotal(employeeMapper.getTotal(null,null));
+        respPageBean.setTotal(employeeMapper.getTotal(null, null));
         return respPageBean;
     }
 
     public Integer updateEmployeeSalaryById(Integer eid, Integer sid) {
-        return employeeMapper.updateEmployeeSalaryById(eid,sid);
+        return employeeMapper.updateEmployeeSalaryById(eid, sid);
     }
 
     public Employee getEmployeeById(Integer empId) {

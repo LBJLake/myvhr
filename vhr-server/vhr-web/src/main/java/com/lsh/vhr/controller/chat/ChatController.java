@@ -16,7 +16,7 @@ public class ChatController {
     HrService hrService;
 
     @GetMapping("/hrs")
-    public List<Hr> getAllHrs(){
+    public List<Hr> getAllHrs() {
         return hrService.getAllHrsExceptCurrentHr();
     }
 }

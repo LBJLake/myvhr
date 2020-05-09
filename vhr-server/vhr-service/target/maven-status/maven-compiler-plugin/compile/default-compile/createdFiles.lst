@@ -1,0 +1,17 @@
+com\lsh\vhr\service\EmployeeTrainService.class
+com\lsh\vhr\config\RabbitConfig.class
+com\lsh\vhr\service\MailSendLogService.class
+com\lsh\vhr\service\NationService.class
+com\lsh\vhr\service\HrService.class
+com\lsh\vhr\service\PoliticsstatusService.class
+com\lsh\vhr\service\PositionService.class
+com\lsh\vhr\utils\POIUtils$1.class
+com\lsh\vhr\service\JobLevelService.class
+com\lsh\vhr\utils\POIUtils.class
+com\lsh\vhr\service\DepartmentService.class
+com\lsh\vhr\service\MenuService.class
+com\lsh\vhr\service\RoleService.class
+com\lsh\vhr\utils\HrUtils.class
+com\lsh\vhr\service\SalaryService.class
+com\lsh\vhr\service\EmployeeService.class
+com\lsh\vhr\task\MailSendTask.class

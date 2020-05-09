@@ -135,7 +135,7 @@
                 this.initHr();
             },
             initHr(){
-                this.getRequest("/hr/info").then(resp=>{
+                this.getRequest("/vhr-web/hr/info").then(resp=>{
                     if (resp){
                         this.hr=resp;
                         this.updateHr=Object.assign({},this.hr);
@@ -153,7 +153,7 @@
                 this.passwordDialogVisible=true;
             },
             updateHrInfo(){
-                this.putRequest("/hr/info",this.updateHr).then(resp=>{
+                this.putRequest("/vhr-web/hr/info",this.updateHr).then(resp=>{
                     if (resp){
                         this.initHr();
                         this.dialogVisible=false;
@@ -166,9 +166,9 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         this.ruleForm.hrid=this.hr.id;
-                        putRequest("/hr/pass",this.ruleForm).then(resp=>{
+                        putRequest("/vhr-web/hr/pass",this.ruleForm).then(resp=>{
                             if (resp){
-                                this.getRequest("/logout");
+                                this.getRequest("/vhr-web/logout");
                                 window.sessionStorage.removeItem("user");
                                 this.$store.commit('initRoutes',[]);
                                 this.$router.replace("/");

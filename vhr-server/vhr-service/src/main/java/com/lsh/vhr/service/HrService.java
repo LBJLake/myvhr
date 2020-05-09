@@ -24,8 +24,8 @@ public class HrService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Hr hr=hrMapper.loadUserByUsername(username);
-        if (hr==null){
+        Hr hr = hrMapper.loadUserByUsername(username);
+        if (hr == null) {
             throw new UsernameNotFoundException("用户名不存在！");
 
         }
@@ -44,8 +44,8 @@ public class HrService implements UserDetailsService {
     @Transactional
     public boolean updateHrRole(Integer hrid, Integer[] rids) {
         hrRoleMapper.deleteByHrid(hrid);
-        if (rids==null)return true;
-        return hrRoleMapper.addRole(hrid,rids)==rids.length;
+        if (rids == null) return true;
+        return hrRoleMapper.addRole(hrid, rids) == rids.length;
     }
 
     public Integer deleteHrById(Integer id) {
@@ -62,16 +62,16 @@ public class HrService implements UserDetailsService {
         String oldpass = (String) info.get("oldpass");
         String pass = (String) info.get("pass");
         String checkPass = (String) info.get("checkPass");
-        if (oldpass==null||oldpass.equals("")||pass==null||pass.equals("")||checkPass==null||checkPass.equals(""))return 0;
+        if (oldpass == null || oldpass.equals("") || pass == null || pass.equals("") || checkPass == null || checkPass.equals(""))
+            return 0;
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        if (encoder.matches(oldpass,hr.getPassword())&&checkPass.equals(pass)) {//matchs第一个参数为明文密码，第二个为匿文密码
+        if (encoder.matches(oldpass, hr.getPassword()) && checkPass.equals(pass)) {//matchs第一个参数为明文密码，第二个为匿文密码
             String encodePass = encoder.encode(pass);
-            return hrMapper.updatePasswd(hr.getId(),encodePass);
-        }
-        else return 0;
+            return hrMapper.updatePasswd(hr.getId(), encodePass);
+        } else return 0;
     }
 
     public Integer updateUserface(String url, Integer id) {
-        return hrMapper.updateUserface(url,id);
+        return hrMapper.updateUserface(url, id);
     }
 }

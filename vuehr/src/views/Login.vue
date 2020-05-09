@@ -37,7 +37,7 @@
                     password: '123',
                     code:''
                 },
-                vcUrl:'/verifyCode?time='+new Date(),
+                vcUrl:'/vhr-web/verifyCode?time='+new Date(),
                 checked: true,
                 rules: {
                     username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
@@ -49,13 +49,13 @@
         },
         methods: {
             updateVerifyCode(){
-                this.vcUrl='/verifyCode?time='+new Date();
+                this.vcUrl='/vhr-web/verifyCode?time='+new Date();
             },
             submitLogin() {
                 this.$refs.loginForm.validate((valid) => {
                     if (valid) {
                         this.loading=true;
-                        this.postKeyValueRequest('/doLogin',this.loginForm).then(resp=>{
+                        this.postKeyValueRequest('/vhr-web/doLogin',this.loginForm).then(resp=>{
                             this.loading=false;
                             if (resp){
                                 //初始化hr

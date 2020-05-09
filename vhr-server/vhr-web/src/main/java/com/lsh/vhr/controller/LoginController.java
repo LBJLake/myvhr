@@ -15,7 +15,7 @@ import java.io.IOException;
 @RestController
 public class LoginController {
     @GetMapping("/login")
-    public RespBean login(){
+    public RespBean login() {
         return RespBean.error("尚未登陆，请登陆！");
     }
 
@@ -24,7 +24,7 @@ public class LoginController {
         VerificationCode code = new VerificationCode();
         BufferedImage image = code.getImage();
         String text = code.getText();
-        session.setAttribute("verify_code",text);
-        VerificationCode.output(image,resp.getOutputStream());
+        session.setAttribute("verify_code", text);
+        VerificationCode.output(image, resp.getOutputStream());
     }
 }

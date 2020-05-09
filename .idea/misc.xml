@@ -6,6 +6,11 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/vhr-server/vhr-web/pom.xml" />
         <option value="$PROJECT_DIR$/mailserver/pom.xml" />
+        <option value="$PROJECT_DIR$/vhr-server/vhr-mapper/pom.xml" />
+        <option value="$PROJECT_DIR$/vhr-server/vhr-model/pom.xml" />
+        <option value="$PROJECT_DIR$/vhr-server/vhr-service/pom.xml" />
+        <option value="$PROJECT_DIR$/vhr-server/vhr-eureka/pom.xml" />
+        <option value="$PROJECT_DIR$/vhr-server/vhr-zuul/pom.xml" />
       </list>
     </option>
   </component>

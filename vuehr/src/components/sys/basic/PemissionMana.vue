@@ -71,7 +71,7 @@
         methods:{
             initRoles(){
                 this.loading=true;
-                this.getRequest("/system/basic/permiss/").then(resp=>{
+                this.getRequest("/vhr-web/system/basic/permiss/").then(resp=>{
                     this.loading=false;
                     if (resp){
                         this.roles=resp;
@@ -85,14 +85,14 @@
               }
             },
             initAllMenus(){
-                this.getRequest("/system/basic/permiss/menus").then(resp=>{
+                this.getRequest("/vhr-web/system/basic/permiss/menus").then(resp=>{
                     if (resp){
                         this.allMenus=resp;
                     }
                 });
             },
             initSelectedMenus(rid){
-                this.getRequest("/system/basic/permiss/mids/"+rid).then(resp=>{
+                this.getRequest("/vhr-web/system/basic/permiss/mids/"+rid).then(resp=>{
                     if (resp){
                         this.selectedMenus=resp;
                     }
@@ -101,7 +101,7 @@
             doUpdate(rid,index){
                 let tree=this.$refs.tree[index];
                 let selectedKeys=tree.getCheckedKeys(true);
-                let url='/system/basic/permiss/?rid='+rid;
+                let url='/vhr-web/system/basic/permiss/?rid='+rid;
                 selectedKeys.forEach(key=>{
                     url+='&mids='+key;
                 });
@@ -117,7 +117,7 @@
             },
             doAddRole(){
                 if (this.role.name&&this.role.nameZh&&this.role.name.trim().length>0&&this.role.nameZh.trim().length>0){
-                    this.postRequest("/system/basic/permiss/",this.role).then(resp=>{
+                    this.postRequest("/vhr-web/system/basic/permiss/",this.role).then(resp=>{
                         if (resp){
                             this.role={
                                 name:'',
@@ -136,7 +136,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    this.deleteRequest("/system/basic/permiss/"+role.id).then(resp=>{
+                    this.deleteRequest("/vhr-web/system/basic/permiss/"+role.id).then(resp=>{
                         if (resp){
                             this.initRoles();
                         }

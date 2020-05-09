@@ -4,11 +4,13 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/mailserver/mailserver.iml" filepath="$PROJECT_DIR$/mailserver/mailserver.iml" />
       <module fileurl="file://$PROJECT_DIR$/vhr.iml" filepath="$PROJECT_DIR$/vhr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vhr-server/vhr-eureka/vhr-eureka.iml" filepath="$PROJECT_DIR$/vhr-server/vhr-eureka/vhr-eureka.iml" />
       <module fileurl="file://$PROJECT_DIR$/vhr-server/vhr-mapper/vhr-mapper.iml" filepath="$PROJECT_DIR$/vhr-server/vhr-mapper/vhr-mapper.iml" />
       <module fileurl="file://$PROJECT_DIR$/vhr-server/vhr-model/vhr-model.iml" filepath="$PROJECT_DIR$/vhr-server/vhr-model/vhr-model.iml" />
       <module fileurl="file://$PROJECT_DIR$/vhr-server/vhr-server.iml" filepath="$PROJECT_DIR$/vhr-server/vhr-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/vhr-server/vhr-service/vhr-service.iml" filepath="$PROJECT_DIR$/vhr-server/vhr-service/vhr-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/vhr-server/vhr-web/vhr-web.iml" filepath="$PROJECT_DIR$/vhr-server/vhr-web/vhr-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vhr-server/vhr-zuul/vhr-zuul.iml" filepath="$PROJECT_DIR$/vhr-server/vhr-zuul/vhr-zuul.iml" />
     </modules>
   </component>
 </project>

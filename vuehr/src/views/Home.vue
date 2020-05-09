@@ -74,7 +74,7 @@
                         cancelButtonText: '取消',
                         type: 'warning'
                     }).then(() => {
-                        this.getRequest("/logout");
+                        this.getRequest("/vhr-web/logout");
                         window.sessionStorage.removeItem("user");
                         this.$router.replace("/");
                         this.$store.commit('initRoutes',[]);

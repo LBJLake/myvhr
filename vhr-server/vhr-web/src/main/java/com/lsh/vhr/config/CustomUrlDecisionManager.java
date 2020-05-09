@@ -18,16 +18,16 @@ public class CustomUrlDecisionManager implements AccessDecisionManager {
         for (ConfigAttribute configAttribute : collection) {
             String needRole = configAttribute.getAttribute();
             //只需登陆就能访问的路径
-            if ("ROLE_LOGIN".equals(needRole)){
-                if (authentication instanceof AnonymousAuthenticationToken){
+            if ("ROLE_LOGIN".equals(needRole)) {
+                if (authentication instanceof AnonymousAuthenticationToken) {
                     throw new AccessDeniedException("尚未登陆，请登录");
-                }else{
+                } else {
                     return;
                 }
             }
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();//用户所拥有角色
             for (GrantedAuthority authority : authorities) {
-                if (authority.getAuthority().equals(needRole))return;
+                if (authority.getAuthority().equals(needRole)) return;
             }
 
         }

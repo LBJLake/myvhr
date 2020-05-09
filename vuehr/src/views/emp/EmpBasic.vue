@@ -722,7 +722,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    this.deleteRequest("/employee/basic/"+data.id).then(resp=>{
+                    this.deleteRequest("/vhr-web/employee/basic/"+data.id).then(resp=>{
                         if (resp){
                             this.initEmps();
                         }
@@ -739,7 +739,7 @@
                 if (this.emp.id){
                     this.$refs['empForm'].validate((valid)=>{
                         if (valid){
-                            this.putRequest("/employee/basic/",this.emp).then(resp=>{
+                            this.putRequest("/vhr-web/employee/basic/",this.emp).then(resp=>{
                                 if (resp){
                                     this.dialogVisible=false;
                                     this.initEmps();
@@ -750,7 +750,7 @@
                 }else {
                     this.$refs['empForm'].validate((valid)=>{
                         if (valid){
-                            this.postRequest("/employee/basic/",this.emp).then(resp=>{
+                            this.postRequest("/vhr-web/employee/basic/",this.emp).then(resp=>{
                                 if (resp){
                                     this.dialogVisible=false;
                                     this.initEmps();
@@ -776,7 +776,7 @@
                 this.popVisible=!this.popVisible;
             },
             getMaxWordID(){
-                this.getRequest("/employee/basic/maxWorkID").then(resp=>{
+                this.getRequest("/vhr-web/employee/basic/maxWorkID").then(resp=>{
                     if (resp){
                         this.emp.workID=resp.obj;
                     }
@@ -784,7 +784,7 @@
             },
             initData(){
                 if (!window.sessionStorage.getItem("deps")){
-                    this.getRequest("/employee/basic/deps").then(resp=>{
+                    this.getRequest("/vhr-web/employee/basic/deps").then(resp=>{
                         if (resp){
                             this.allDeps=resp;
                             window.sessionStorage.setItem("deps",JSON.stringify(resp));
@@ -795,7 +795,7 @@
                 }
 
                 if (!window.sessionStorage.getItem("positions")){
-                    this.getRequest("/employee/basic/positions").then(resp=>{
+                    this.getRequest("/vhr-web/employee/basic/positions").then(resp=>{
                         if (resp){
                             this.positions=resp;
                             window.sessionStorage.setItem("positions",JSON.stringify(resp));
@@ -806,7 +806,7 @@
                 }
 
                 if (!window.sessionStorage.getItem("nations")){
-                    this.getRequest("/employee/basic/nations").then(resp=>{
+                    this.getRequest("/vhr-web/employee/basic/nations").then(resp=>{
                         if (resp){
                             this.nations=resp;
                             window.sessionStorage.setItem("nations",JSON.stringify(resp));
@@ -817,7 +817,7 @@
                 }
 
                 if (!window.sessionStorage.getItem("joblevels")){
-                    this.getRequest("/employee/basic/joblevels").then(resp=>{
+                    this.getRequest("/vhr-web/employee/basic/joblevels").then(resp=>{
                         if (resp){
                             this.joblevels=resp;
                             window.sessionStorage.setItem("joblevels",JSON.stringify(resp));
@@ -828,7 +828,7 @@
                 }
 
                 if (!window.sessionStorage.getItem("politicsstatus")){
-                    this.getRequest("/employee/basic/politicsstatus").then(resp=>{
+                    this.getRequest("/vhr-web/employee/basic/politicsstatus").then(resp=>{
                         if (resp){
                             this.politicsstatus=resp;
                             window.sessionStorage.setItem("politicsstatus",JSON.stringify(resp));
@@ -841,7 +841,7 @@
             },
             initEmps(type){
                 this.loading=true;
-                let url='/employee/basic/?page='+this.page+'&size='+this.size;
+                let url='/vhr-web/employee/basic/?page='+this.page+'&size='+this.size;
                 if (type&&type=='advanced'){
                     if (this.searchValue.politicId){
                         url+="&politicId="+this.searchValue.politicId

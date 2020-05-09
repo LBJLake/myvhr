@@ -13,6 +13,7 @@ import java.util.List;
 public class PositionService {
     @Autowired
     PositionMapper positionMapper;
+
     public List<Position> getAllPositions() {
         return positionMapper.getAllPositions();
     }

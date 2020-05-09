@@ -124,7 +124,7 @@
                     this.multipleSelection.forEach(item=>{
                         ids+='ids='+item.id+'&';
                     });
-                    this.deleteRequest("/system/basic/pos/"+ids).then(resp=>{
+                    this.deleteRequest("/vhr-web/system/basic/pos/"+ids).then(resp=>{
                         if (resp){
                             this.initPositions();
                         }
@@ -142,7 +142,7 @@
             },
             addPosition(){
                 if (this.pos.name&&this.pos.name.trim().length>0){
-                    this.postRequest("/system/basic/pos/",this.pos).then(resp=>{
+                    this.postRequest("/vhr-web/system/basic/pos/",this.pos).then(resp=>{
                         if (resp){
                             this.initPositions();
                             this.pos.name='';
@@ -157,7 +157,7 @@
                 this.dialogVisible=true;
             },
             doUpdate(){
-                this.putRequest("/system/basic/pos/",this.updatePos).then(resp=>{
+                this.putRequest("/vhr-web/system/basic/pos/",this.updatePos).then(resp=>{
                     if (resp){
                         this.initPositions();
                         this.updatePos.name='';
@@ -171,7 +171,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    this.deleteRequest("/system/basic/pos/"+data.id).then(resp=>{
+                    this.deleteRequest("/vhr-web/system/basic/pos/"+data.id).then(resp=>{
                         if (resp){
                             this.initPositions();
                         }
@@ -185,7 +185,7 @@
             },
             initPositions(){
                 this.loading=true;
-                this.getRequest("/system/basic/pos/").then(resp=>{
+                this.getRequest("/vhr-web/system/basic/pos/").then(resp=>{
                     this.loading=false;
                     if (resp){
                         this.positions=resp;

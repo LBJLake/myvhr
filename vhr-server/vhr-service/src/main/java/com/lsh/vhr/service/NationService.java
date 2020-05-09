@@ -15,6 +15,7 @@ public class NationService {
     NationMapper nationMapper;
     @Autowired
     PoliticsstatusMapper politicsstatusMapper;
+
     public List<Nation> getAllNations() {
         return nationMapper.getAllNations();
     }

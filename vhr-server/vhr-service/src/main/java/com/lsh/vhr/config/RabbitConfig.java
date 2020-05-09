@@ -16,41 +16,43 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitConfig {
-    public final static Logger logger=LoggerFactory.getLogger(RabbitConfig.class);
+    public final static Logger logger = LoggerFactory.getLogger(RabbitConfig.class);
     @Autowired
     CachingConnectionFactory cachingConnectionFactory;
     @Autowired
     MailSendLogService mailSendLogService;
 
     @Bean
-    RabbitTemplate rabbitTemplate(){
+    RabbitTemplate rabbitTemplate() {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(cachingConnectionFactory);
-        rabbitTemplate.setConfirmCallback((data,ask,cause)->{
+        rabbitTemplate.setConfirmCallback((data, ask, cause) -> {
             String msgId = data.getId();
-            if (ask){
+            if (ask) {
                 //消息发送成功
-                logger.info(msgId+"：消息发送成功");
-                mailSendLogService.updateMailSendLogStatus(msgId,1);//修改数据库中的记录，消息投递成功
-            }else {
-                logger.info(msgId+"：消息发送失败");
+                logger.info(msgId + "：消息发送成功");
+                mailSendLogService.updateMailSendLogStatus(msgId, 1);//修改数据库中的记录，消息投递成功
+            } else {
+                logger.info(msgId + "：消息发送失败");
             }
         });
-        rabbitTemplate.setReturnCallback((msg,repCode,repText,exchange,routingkey)->{
+        rabbitTemplate.setReturnCallback((msg, repCode, repText, exchange, routingkey) -> {
             logger.info("消息发送失败");
         });
         return rabbitTemplate;
     }
 
     @Bean
-    Queue mailQueue(){
-        return new Queue(MailConstants.MAIL_QUEUE_NAME,true);
+    Queue mailQueue() {
+        return new Queue(MailConstants.MAIL_QUEUE_NAME, true);
     }
+
     @Bean
-    DirectExchange mailExchange(){
-        return new DirectExchange(MailConstants.MAIL_EXCHANGE_NAME,true,false);
+    DirectExchange mailExchange() {
+        return new DirectExchange(MailConstants.MAIL_EXCHANGE_NAME, true, false);
     }
+
     @Bean
-    Binding mailBinding(){
+    Binding mailBinding() {
         return BindingBuilder.bind(mailQueue()).to(mailExchange()).with(MailConstants.MAIL_ROUTING_KEY_NAME);
     }
 }

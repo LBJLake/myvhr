@@ -13,31 +13,32 @@ import java.util.List;
 public class DepartmentController {
     @Autowired
     DepartmentService departmentService;
+
     @GetMapping("/")
-    public List<Department> getAllDepartments(){
+    public List<Department> getAllDepartments() {
         return departmentService.getAllDepartments();
     }
 
     @PostMapping("/")
-    public RespBean addDep(@RequestBody Department department){
+    public RespBean addDep(@RequestBody Department department) {
         departmentService.addDep(department);
-        if (department.getResult()==1){
-            return RespBean.ok("添加成功",department);
-        }else{
+        if (department.getResult() == 1) {
+            return RespBean.ok("添加成功", department);
+        } else {
             return RespBean.error("添加失败");
         }
     }
 
     @DeleteMapping("/{id}")
-    public RespBean deleteDepById(@PathVariable Integer id){
+    public RespBean deleteDepById(@PathVariable Integer id) {
         Department dep = new Department();
         dep.setId(id);
         departmentService.deleteDepById(dep);
-        if (dep.getResult()==-2){
+        if (dep.getResult() == -2) {
             return RespBean.error("该部门下有子部门，删除失败！");
-        }else if (dep.getResult()==-1){
+        } else if (dep.getResult() == -1) {
             return RespBean.error("该部门下有员工，删除失败！");
-        }else if (dep.getResult()==1){
+        } else if (dep.getResult() == 1) {
             return RespBean.ok("删除成功！");
         }
         return RespBean.error("删除失败！");

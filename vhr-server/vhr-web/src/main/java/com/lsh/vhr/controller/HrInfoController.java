@@ -27,23 +27,23 @@ public class HrInfoController {
     String secretKey;
 
     @GetMapping("/hr/info")
-    public Hr getCurrentHr(Authentication authentication){
+    public Hr getCurrentHr(Authentication authentication) {
         return ((Hr) authentication.getPrincipal());
     }
 
     @PutMapping("/hr/info")
-    public RespBean updateHr(@RequestBody Hr hr,Authentication authentication){
-        if (hrService.updateHr(hr)==1){
+    public RespBean updateHr(@RequestBody Hr hr, Authentication authentication) {
+        if (hrService.updateHr(hr) == 1) {
             SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(hr
-                    ,authentication.getCredentials(),authentication.getAuthorities()));
+                    , authentication.getCredentials(), authentication.getAuthorities()));
             return RespBean.ok("修改成功！");
         }
         return RespBean.error("修改失败！");
     }
 
     @PutMapping("/hr/pass")
-    public RespBean updateHrPassword(@RequestBody Map<String,Object> info){
-        if (hrService.updateHrPassword(info)==1){
+    public RespBean updateHrPassword(@RequestBody Map<String, Object> info) {
+        if (hrService.updateHrPassword(info) == 1) {
 
             return RespBean.ok("修改密码成功！");
         }
@@ -51,9 +51,9 @@ public class HrInfoController {
     }
 
     @PostMapping("/hr/userface")
-    public RespBean updateHrUserface(MultipartFile file,Integer id,Authentication authentication){
+    public RespBean updateHrUserface(MultipartFile file, Integer id, Authentication authentication) {
         String fileId = FastDFSUtils.upload(file);
-        String url =FastDFSUtils.uploadWithToken(fileId,nginxHost,secretKey);
+        String url = FastDFSUtils.uploadWithToken(fileId, nginxHost, secretKey);
         if (hrService.updateUserface(url, id) == 1) {
             Hr hr = (Hr) authentication.getPrincipal();
             hr.setUserface(url);

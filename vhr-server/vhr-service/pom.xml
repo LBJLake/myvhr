@@ -13,7 +13,7 @@
     <artifactId>vhr-service</artifactId>
 
     <dependencies>
-<!--        vhr-mapper-->
+        <!--        vhr-mapper-->
         <dependency>
             <groupId>com.lsh</groupId>
             <artifactId>vhr-mapper</artifactId>

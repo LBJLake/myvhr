@@ -121,7 +121,7 @@
             },
             hidePop(data){
                 if (this.currentSalary){
-                    this.putRequest("/salary/sobconf/?eid="+data.id+"&sid="+this.currentSalary).then(resp=>{
+                    this.putRequest("/vhr-web/salary/sobconf/?eid="+data.id+"&sid="+this.currentSalary).then(resp=>{
                         if (resp){
                             this.initEmps();
                         }
@@ -137,14 +137,14 @@
 
             },
             initSalaries(){
-                this.getRequest("/salary/sobconf/salaries").then    (resp=>{
+                this.getRequest("/vhr-web/salary/sobconf/salaries").then    (resp=>{
                     if (resp){
                         this.salaries=resp;
                     }
                 });
             },
             initEmps(){
-                this.getRequest("/salary/sobconf/?page="+this.currentPage+"&size="+this.currentSize).then(resp=>{
+                this.getRequest("/vhr-web/salary/sobconf/?page="+this.currentPage+"&size="+this.currentSize).then(resp=>{
                     if (resp){
                         this.emps=resp.data;
                         this.total=resp.total;

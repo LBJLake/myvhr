@@ -106,7 +106,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    this.deleteRequest("/salary/sob/"+data.id).then(resp=>{
+                    this.deleteRequest("/vhr-web/salary/sob/"+data.id).then(resp=>{
                         if (resp){
                             this.initSalaries();
                         }
@@ -122,14 +122,14 @@
             nextStep(){
                 if (this.activeItemIndex==10){
                     if (this.dialogTitle=='修改工资账套'){
-                        this.putRequest("/salary/sob/",this.salary).then(resp=>{
+                        this.putRequest("/vhr-web/salary/sob/",this.salary).then(resp=>{
                             if (resp){
                                 this.initSalaries();
                                 this.dialogVisible=false;
                             }
                         });
                     }else{
-                        this.postRequest("/salary/sob/",this.salary).then(resp=>{
+                        this.postRequest("/vhr-web/salary/sob/",this.salary).then(resp=>{
                             if (resp){
                                 this.initSalaries();
                                 this.dialogVisible=false;
@@ -186,7 +186,7 @@
                 this.dialogVisible=true;
             },
             initSalaries(){
-                this.getRequest("/salary/sob/").then(resp=>{
+                this.getRequest("/vhr-web/salary/sob/").then(resp=>{
                    if (resp){
                        this.salaries=resp;
                    }

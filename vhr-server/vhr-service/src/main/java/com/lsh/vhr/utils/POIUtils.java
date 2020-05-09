@@ -35,71 +35,71 @@ public class POIUtils {
         summInfo.setAuthor("javaboy");
         summInfo.setComments("文档由javaboy提供");
 
-        HSSFCellStyle headerStyle=workbook.createCellStyle();
+        HSSFCellStyle headerStyle = workbook.createCellStyle();
         headerStyle.setFillForegroundColor(IndexedColors.YELLOW.index);
         headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 
-        HSSFCellStyle dateCellStyle=workbook.createCellStyle();
+        HSSFCellStyle dateCellStyle = workbook.createCellStyle();
         dateCellStyle.setDataFormat(HSSFDataFormat.getBuiltinFormat("m/d/yy"));
 
         HSSFSheet sheet = workbook.createSheet("员工信息表");
-        sheet.setColumnWidth(0,5*256);
-        sheet.setColumnWidth(1,12*256);
-        sheet.setColumnWidth(2,10*256);
-        sheet.setColumnWidth(3,5*256);
-        sheet.setColumnWidth(4,12*256);
-        sheet.setColumnWidth(5,20*256);
-        sheet.setColumnWidth(6,10*256);
-        sheet.setColumnWidth(7,10*256);
-        sheet.setColumnWidth(8,16*256);
-        sheet.setColumnWidth(9,12*256);
-        sheet.setColumnWidth(10,15*256);
-        sheet.setColumnWidth(11,20*256);
-        sheet.setColumnWidth(12,16*256);
-        sheet.setColumnWidth(13,14*256);
-        sheet.setColumnWidth(14,14*256);
-        sheet.setColumnWidth(15,12*256);
-        sheet.setColumnWidth(16,8*256);
-        sheet.setColumnWidth(17,20*256);
-        sheet.setColumnWidth(18,20*256);
-        sheet.setColumnWidth(19,12*256);
-        sheet.setColumnWidth(20,8*256);
-        sheet.setColumnWidth(21,25*256);
-        sheet.setColumnWidth(22,14*256);
-        sheet.setColumnWidth(23,15*256);
-        sheet.setColumnWidth(24,15*256);
-        sheet.setColumnWidth(25,15*256);
+        sheet.setColumnWidth(0, 5 * 256);
+        sheet.setColumnWidth(1, 12 * 256);
+        sheet.setColumnWidth(2, 10 * 256);
+        sheet.setColumnWidth(3, 5 * 256);
+        sheet.setColumnWidth(4, 12 * 256);
+        sheet.setColumnWidth(5, 20 * 256);
+        sheet.setColumnWidth(6, 10 * 256);
+        sheet.setColumnWidth(7, 10 * 256);
+        sheet.setColumnWidth(8, 16 * 256);
+        sheet.setColumnWidth(9, 12 * 256);
+        sheet.setColumnWidth(10, 15 * 256);
+        sheet.setColumnWidth(11, 20 * 256);
+        sheet.setColumnWidth(12, 16 * 256);
+        sheet.setColumnWidth(13, 14 * 256);
+        sheet.setColumnWidth(14, 14 * 256);
+        sheet.setColumnWidth(15, 12 * 256);
+        sheet.setColumnWidth(16, 8 * 256);
+        sheet.setColumnWidth(17, 20 * 256);
+        sheet.setColumnWidth(18, 20 * 256);
+        sheet.setColumnWidth(19, 12 * 256);
+        sheet.setColumnWidth(20, 8 * 256);
+        sheet.setColumnWidth(21, 25 * 256);
+        sheet.setColumnWidth(22, 14 * 256);
+        sheet.setColumnWidth(23, 15 * 256);
+        sheet.setColumnWidth(24, 15 * 256);
+        sheet.setColumnWidth(25, 15 * 256);
 
         HSSFRow r0 = sheet.createRow(0);
         HSSFCell c0 = r0.createCell(0);
         c0.setCellStyle(headerStyle);
         c0.setCellValue("编号");
         HSSFCell c1 = r0.createCell(1);
-        c1 .setCellStyle(headerStyle);
+        c1.setCellStyle(headerStyle);
         c1.setCellValue("姓名");
         HSSFCell c2 = r0.createCell(2);
-        c2 .setCellStyle(headerStyle);
+        c2.setCellStyle(headerStyle);
         c2.setCellValue("工号");
         HSSFCell c3 = r0.createCell(3);
-        c3 .setCellStyle(headerStyle);
+        c3.setCellStyle(headerStyle);
         c3.setCellValue("性别");
         HSSFCell c4 = r0.createCell(4);
-        c4 .setCellStyle(headerStyle);
+        c4.setCellStyle(headerStyle);
         c4.setCellValue("出生日期");
         HSSFCell c5 = r0.createCell(5);
-        c5 .setCellStyle(headerStyle);
+        c5.setCellStyle(headerStyle);
         c5.setCellValue("身份证号码");
         HSSFCell c6 = r0.createCell(6);
-        c6 .setCellStyle(headerStyle);
+        c6.setCellStyle(headerStyle);
         c6.setCellValue("婚姻状况");
         HSSFCell c7 = r0.createCell(7);
-        c7 .setCellStyle(headerStyle);
+        c7.setCellStyle(headerStyle);
         c7.setCellValue("民族");
         HSSFCell c8 = r0.createCell(8);
-        c8 .setCellStyle(headerStyle);
+        c8.setCellStyle(headerStyle);
         c8.setCellValue("籍贯");
         HSSFCell c9 = r0.createCell(9);
-        c9 .setCellStyle(headerStyle);
+        c9.setCellStyle(headerStyle);
         c9.setCellValue("政治面貌");
         HSSFCell c10 = r0.createCell(10);
         c10.setCellStyle(headerStyle);
@@ -191,21 +191,22 @@ public class POIUtils {
             cell25.setCellValue(emp.getConversionTime());
         }
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        HttpHeaders headers=new HttpHeaders();
+        HttpHeaders headers = new HttpHeaders();
         try {
             headers.setContentDispositionFormData("attachment",
-                    new String("员工表.xls".getBytes("UTF-8"),"ISO-8859-1"));
+                    new String("员工表.xls".getBytes("UTF-8"), "ISO-8859-1"));
             headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
             workbook.write(baos);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return new ResponseEntity<byte[]>(baos.toByteArray(),headers, HttpStatus.CREATED);
+        return new ResponseEntity<byte[]>(baos.toByteArray(), headers, HttpStatus.CREATED);
     }
 
     /**
      * Excel解析成员工数据结合
+     *
      * @param file
      * @param allNations
      * @param allPoliticsstatus
@@ -215,32 +216,32 @@ public class POIUtils {
      * @return
      */
     public static List<Employee> excel2Employee(MultipartFile file, List<Nation> allNations, List<Politicsstatus> allPoliticsstatus, List<Department> allDepartments, List<Position> allPositions, List<JobLevel> allJobLevels) {
-        List<Employee> list=new ArrayList<>();
-        Employee emp=null;
+        List<Employee> list = new ArrayList<>();
+        Employee emp = null;
         try {
             HSSFWorkbook workbook = new HSSFWorkbook(file.getInputStream());
             int numberOfSheets = workbook.getNumberOfSheets();
-            for (int i = 0; i <numberOfSheets ; i++) {
+            for (int i = 0; i < numberOfSheets; i++) {
                 HSSFSheet sheet = workbook.getSheetAt(i);
                 int physicalNumberOfRows = sheet.getPhysicalNumberOfRows();
-                for (int j = 0; j <physicalNumberOfRows ; j++) {
+                for (int j = 0; j < physicalNumberOfRows; j++) {
                     //跳过标题行
-                    if (j==0){
+                    if (j == 0) {
                         continue;//跳过标题行
                     }
                     HSSFRow row = sheet.getRow(j);
-                    if (row==null){
+                    if (row == null) {
                         continue;//防止中间有空行
                     }
                     int physicalNumberOfCells = row.getPhysicalNumberOfCells();
-                    emp=new Employee();
+                    emp = new Employee();
                     for (int k = 0; k < physicalNumberOfCells; k++) {
 
                         HSSFCell cell = row.getCell(k);
-                        switch (cell.getCellType()){
+                        switch (cell.getCellType()) {
                             case STRING:
                                 String cellValue = cell.getStringCellValue();
-                                switch (k){
+                                switch (k) {
                                     case 1:
                                         emp.setName(cellValue);
                                         break;
@@ -257,14 +258,14 @@ public class POIUtils {
                                         emp.setWedlock(cellValue);
                                         break;
                                     case 7:
-                                        int nationIndex=allNations.indexOf(new Nation(cellValue));
+                                        int nationIndex = allNations.indexOf(new Nation(cellValue));
                                         emp.setNationId(allNations.get(nationIndex).getId());
                                         break;
                                     case 8:
                                         emp.setNativePlace(cellValue);
                                         break;
                                     case 9:
-                                        int politicsstatusIndex=allPoliticsstatus.indexOf(new Politicsstatus(cellValue));
+                                        int politicsstatusIndex = allPoliticsstatus.indexOf(new Politicsstatus(cellValue));
                                         emp.setPoliticId(allPoliticsstatus.get(politicsstatusIndex).getId());
                                         break;
                                     case 10:
@@ -274,15 +275,15 @@ public class POIUtils {
                                         emp.setAddress(cellValue);
                                         break;
                                     case 12:
-                                        int departmentIndex=allDepartments.indexOf(new Department(cellValue));
-                                        emp.setDepartmentId(allDepartments. get(departmentIndex).getId());
+                                        int departmentIndex = allDepartments.indexOf(new Department(cellValue));
+                                        emp.setDepartmentId(allDepartments.get(departmentIndex).getId());
                                         break;
                                     case 13:
-                                        int jobLevelIndex=allJobLevels.indexOf(new JobLevel(cellValue));
+                                        int jobLevelIndex = allJobLevels.indexOf(new JobLevel(cellValue));
                                         emp.setJobLevelId(allJobLevels.get(jobLevelIndex).getId());
                                         break;
                                     case 14:
-                                        int positionsIndex=allPositions.indexOf(new Position(cellValue));
+                                        int positionsIndex = allPositions.indexOf(new Position(cellValue));
                                         emp.setPosId(allPositions.get(positionsIndex).getId());
                                         break;
                                     case 15:
@@ -306,9 +307,9 @@ public class POIUtils {
 
                                 }
                                 break;
-                            default:{
+                            default: {
                                 Date dateCellValue = cell.getDateCellValue();
-                                switch (k){
+                                switch (k) {
                                     case 4:
                                         emp.setBirthday(dateCellValue);
                                         break;
@@ -333,7 +334,7 @@ public class POIUtils {
                         }
 
                     }
-    
+
                     list.add(emp);
                 }
             }
